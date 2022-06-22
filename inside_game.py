@@ -19,6 +19,8 @@ def main(win):
     level_time = 0
     score = 0
 
+    gui.draw_window(win, grid, score, last_score)
+
     while run:
         grid = gui.create_grid(locked_positions)
         fall_time += clock.get_rawtime()
@@ -82,7 +84,9 @@ def main(win):
 
         if rules.check_lost(locked_positions):
             gui.draw_text_middle(win, " You lost :( ", 80, (200, 100, 50))
+            gui.update_score(score)
+            gui.draw_window(win, grid, score, last_score)
             pygame.display.update()
             pygame.time.delay(1500)
             run = False
-            gui.update_score(score)
+            #gui.update_score(score)

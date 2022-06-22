@@ -1,5 +1,6 @@
 import consts
 import pygame
+import database
 
 
 def create_grid(locked_pos={}):
@@ -74,6 +75,10 @@ def clear_rows(grid, locked):
 def update_score(newScore):
     score = max_score()
 
+    database.c.execute("INSERT INTO players VALUES ('jd',7)")
+    database.c.execute("SELECT * FROM players ORDER BY score DESC")
+    database.conn.commit()
+
     with open('scores.txt', 'w') as file:
         if newScore > int(score):
             file.write(str(newScore))
@@ -121,7 +126,7 @@ def draw_window(surface, grid, score=0, last_score=0):
     # zabawa zeby to bylo na srodku
 
     #curr score
-    font = pygame.font.SysFont('Arial', 30)
+    font = pygame.font.SysFont('Arial', 20)
     label = font.render('Score: ' + str(score), True, (30, 60, 90))
 
     sx = consts.top_left_x + consts.play_width + 50
@@ -134,6 +139,14 @@ def draw_window(surface, grid, score=0, last_score=0):
 
     sx = consts.top_left_x - 250
     sy = consts.top_left_y + 200
+
+    surface.blit(label, (sx + 10, sy + 140))
+
+    # top score
+    label = font.render('Top Score: ' + str(database.c.fetchone()), True, (30, 60, 90))
+
+    sx = consts.top_left_x - 250
+    sy = consts.top_left_y + 270
 
     surface.blit(label, (sx + 10, sy + 140))
 

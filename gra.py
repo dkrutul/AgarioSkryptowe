@@ -2,6 +2,7 @@ import pygame
 import gui
 import inside_game
 import consts
+import input_gui
 
 pygame.font.init()
 
@@ -24,5 +25,9 @@ def main_menu(win):
 
 win = pygame.display.set_mode((consts.s_width, consts.s_height))
 pygame.display.set_caption('Tetris')
+
+s_win = input_gui.ROOT
+s_win.withdraw()
+
 main_menu(win)
 
