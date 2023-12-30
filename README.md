@@ -1,3 +1,3 @@
-# Gra Tetris Skryptowe LAB
+# Gra Tetris
 
-Znana gra tetris na podstawie pierwszych przygód z pygame i walki z deadlinem
+Tetris game based on pygame.
